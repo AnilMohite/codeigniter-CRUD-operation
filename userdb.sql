@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2020 at 05:35 AM
+-- Generation Time: Oct 26, 2020 at 11:10 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -25,6 +25,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `username` text NOT NULL,
+  `password` text NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `username`, `password`, `date`, `status`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '2020-10-26 06:28:49', '1');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -42,17 +63,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `dob`, `photo`, `status`) VALUES
-(6, 'anilq123123', 'anil@gmail.com', '2020-12-31', 'WhatsApp_Image_2019-10-04_at_7_53_45_PM_(2).jpeg', 'Deactive'),
-(7, 'asdf', '', '', '', ''),
-(8, 'ANIL MOHITE', 'MOHITEANIL725@GMAIL.COM', '2020-12-31', '', 'Active'),
-(9, 'Anil Mohite', 'anil123@gmail.com', '2020-12-31', 'mypic.jpg', 'Active'),
-(10, 'Anil', 'anil22@gmail.com', '2019-12-01', 'jijau.jpeg', 'Active'),
-(11, 'sagar123', 'anil22@gmail.com', '2020-12-31', 'sagar.png', 'Active'),
-(12, 'sadf', 'sadf@asdf.asf', '2020-12-31', NULL, 'Deactive');
+(17, 'sunil', 'sunil@gmail.com', '2020-12-01', 'jijau.jpeg', 'Active'),
+(18, 'anil', 'anil@gmail.com', '2020-01-01', 'ER_Diagram.png', 'Active');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -65,10 +87,16 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

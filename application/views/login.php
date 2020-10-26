@@ -45,16 +45,78 @@
                 <div class="form-group">
                     <label for="username">User Name</label>
                     <input type="text" class="form-control" id="username" name="username">
+                    <span id="username_error"></span>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password">
+                    <span id="password_error"></span>
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" name="submit" id="login" class="btn btn-primary">Login</button>
             </form>
 		</div>
 	</div>
 
+    <script type="text/javascript"> 
+    $(document).ready(function(){
+        $('#username_error').hide();
+        $('#password_error').hide();
+
+        var userErr = true;
+        var passErr = true;
+
+        //user validation
+        $('#username').keyup(function(){
+          username_check();
+        })
+        function username_check(){
+          var user_val = $('#username').val();
+          if(user_val.length == ''){
+            $('#username_error').show();
+            $('#username_error').html("Please Enter Username");
+            $('#username_error').focus();
+            $('#username_error').css("color","red");
+            userErr= false;
+            return false;
+          }else{
+            $('#username_error').hide();
+            $('#username_error').html('');
+          }
+        }
+        // password validation
+        $('#password').keyup(function(){
+          password_check();
+        })
+        
+        function password_check(){
+          var dob_val = $('#password').val();
+          if(dob_val.length == ''){
+            $('#password_error').show();
+            $('#password_error').html("Please Enter Password");
+            $('#password_error').focus();
+            $('#password_error').css("color","red");
+            passErr= false;
+            return false;
+          }else{
+            $('#password_error').hide();
+            $('#password_error').html('');
+          }
+        }
+        //final submit btn validation
+        $('#login').click(function(){
+          userErr = true;
+          passErr = true;
+
+          username_check();
+          password_check();
+          if((userErr==true) && (passErr==true)){
+            return true;
+          }else{
+            return false;
+          }
+        })
+    })
+</script>
 </body>
 
 </html>

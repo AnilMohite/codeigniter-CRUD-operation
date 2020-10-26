@@ -1,3 +1,12 @@
+##################
+Project config
+##################
+extract zip file and past it on server location
+Create database 'userdb'
+import give sql file 'userdb.sql' in that database
+username : admin
+password : admin
+
 ###################
 What is CodeIgniter
 ###################
