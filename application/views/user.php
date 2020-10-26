@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>User</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
 
+  <?php include('header.php');?>
+  
 <div class="container">
   <div class="row">
-    <h2>User
+    <h2>User 
       <span style="float:right"><a href="<?= base_url(); ?>add" class="btn btn-primary">Add</a></span>
     </h2>
     <hr>
@@ -47,7 +37,8 @@
         <td><?= $user['status'];?></td>
         <td>
           <a class="btn btn-warning" href="<?= base_url('welcome/user_edit/'.$user['id']);?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-          <a class="btn btn-danger" href="<?= base_url('welcome/user_del/'.$user['id']);?>"><i class="fa fa-trash" aria-hidden="true"></i></a>
+          <a class="btn btn-danger" onclick="delfunction(<?= $user['id'];?>)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+          <!-- <a class="btn btn-danger" href="<?= base_url('welcome/user_del/'.$user['id']);?>"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
         </td>
       </tr>
       <?php } ?>
@@ -59,7 +50,21 @@
     echo $links;
     }
   ?>
-</div>
-
-</body>
-</html>
+  </div>
+  <script type="text/javascript">
+    function delfunction(id){
+      var id = id;
+      var x = confirm("Are you sure you want to delete?");
+      if (x){
+        $.ajax({
+            url: "<?= base_url()?>welcome/user_del/"+id,
+            type: "POST",
+            success: function(data){
+              console.log('succ:'+data);
+              window.location.reload();
+            }
+        });
+      }
+    }
+  </script>
+  <?php include('footer.php');?>

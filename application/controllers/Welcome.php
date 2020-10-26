@@ -138,7 +138,7 @@ class Welcome extends CI_Controller {
 				if($run)
 				{
 					$this->session->set_flashdata('messageadd','User Updated Successfully.'); 
-					redirect(base_url());
+					redirect(base_url("welcome"));
 				}
 				else{
 					$this->session->set_flashdata('messageadd','Updated error.'); 
@@ -151,7 +151,7 @@ class Welcome extends CI_Controller {
 				if($run)
 				{
 					$this->session->set_flashdata('messageadd','User Add Successfully.'); 
-					redirect(base_url());
+					redirect(base_url("welcome"));
 				}
 				else{
 					$this->session->set_flashdata('messageadd','Add error.'); 
@@ -186,10 +186,10 @@ class Welcome extends CI_Controller {
 				unlink("uploads/".$dimg);
 			}
 			$this->session->set_flashdata('message','User Deleted Successfully');
-			redirect(base_url());
+			redirect(base_url("welcome"));
 		}else{
 			$this->session->set_flashdata('message','Delete error');
-			redirect(base_url());
+			redirect(base_url("welcome"));
 		}
 
 	}
