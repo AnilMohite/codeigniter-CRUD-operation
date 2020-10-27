@@ -27,12 +27,21 @@ class user_model extends CI_Model {
         return $run =  $this->db->delete('users');
     }
     public function user_update($data,$id){
-        $this->db->where('id', $id);
-        $run =  $this->db->update('users', $data);
-        if($run)
-            return true;	
-        else
-            return false;  
+        // $this->db->where('email', $data['email']);
+        // $run = $this->db->get('users');
+        $email = $data['email'];
+        $run = $this->db->query("SELECT * FROM `users` WHERE `id` not in('$id') and `email`='$email'");
+    //    echo $this->db->last_query();
+        $econunt = $run->num_rows();
+
+        if($econunt >= 1){
+            return false;
+        }else{        
+            $this->db->where('id', $id);
+            $run =  $this->db->update('users', $data);
+            return true;
+            
+        } 
     }
 
     //for pagination
@@ -47,4 +56,5 @@ class user_model extends CI_Model {
 
         return $query->result_array();
     }
+ 
 }

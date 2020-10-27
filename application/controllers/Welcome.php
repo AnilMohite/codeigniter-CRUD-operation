@@ -69,8 +69,9 @@ class Welcome extends CI_Controller {
 	{
 		$editid = $this->input->post('id');
 		$this->form_validation->set_rules('name','Name Required','required');
+		
 		if($editid == '' || $editid == null){
-			$this->form_validation->set_rules('email', 'Email', 'required|is_unique[users.email]');
+			$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[users.email]');
 		}
 		$this->form_validation->set_rules('dob','DOB Required','required');
 		$this->form_validation->set_rules('status','Status Required','required');
@@ -134,15 +135,24 @@ class Welcome extends CI_Controller {
 		
 			if($editid){
 					
-				$run = $this->user_model->user_update($data, $editid);
+				$run = $this->user_model->user_update($data, $editid);				
 				if($run)
 				{
 					$this->session->set_flashdata('messageadd','User Updated Successfully.'); 
 					redirect(base_url("welcome"));
 				}
 				else{
-					$this->session->set_flashdata('messageadd','Updated error.'); 
-					redirect(base_url('add'));
+					$data['row'] = array(
+						'errors' => validation_errors(),
+						'emailErr' => 'Email Already Exist',
+						'id' => $this->security->xss_clean($this->input->post('id')),
+						'name' => $this->security->xss_clean($this->input->post('name')),
+						'email' => $this->security->xss_clean($this->input->post('email')),
+						'dob' => $this->security->xss_clean($this->input->post('dob')),
+						'status' => $this->security->xss_clean($this->input->post('status')),
+						'photo' => $imgData
+					);
+					$this->load->view('user_add',$data);
 				}
 				
 			}else{
@@ -163,6 +173,7 @@ class Welcome extends CI_Controller {
 		{
 			$data['row'] = array(
                 'errors' => validation_errors(),
+				'id' => $this->security->xss_clean($this->input->post('id')),
 				'name' => $this->security->xss_clean($this->input->post('name')),
 				'email' => $this->security->xss_clean($this->input->post('email')),
 				'dob' => $this->security->xss_clean($this->input->post('dob')),

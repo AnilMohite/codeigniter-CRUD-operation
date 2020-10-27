@@ -6,10 +6,17 @@
         <span style="float:right"><a href="<?= base_url("welcome"); ?>" class="btn btn-primary">Back</a></span>
         </h2>
         <hr>
-        <?= @$data; ?>
-        <?php if(validation_errors()){ ?>
+     
+        <?php
+      
+        if(validation_errors()){ ?>
         <div class="alert alert-danger" role="alert">
             <?= validation_errors();?>
+        </div>  
+        <?php }?>
+        <?php if(@$row['emailErr']){ ?>
+        <div class="alert alert-danger" role="alert">
+            <?= @$row['emailErr'];?>
         </div>  
         <?php }?>
    </div>
@@ -33,7 +40,7 @@
     </div>
     <div class="form-group">
         <label for="exampleInputFile"> Photo :-  </label> <br />
-      <?php if(@$row['photo']){ ?>
+      <?php if(!empty(@$row['photo'])){ ?>
         <input type="hidden" name="image1" value="<?= @$row['photo']; ?>">
         <img src="<?= base_url(); ?>uploads/<?= @$row['photo']; ?>"  height="100" width="100px"/> <br /> 
       <?php } ?>
